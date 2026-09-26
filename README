@@ -1,0 +1,114 @@
+# Network+ VLAN Segmentation & Inter-VLAN Routing Lab
+
+## Project Overview
+
+This project demonstrates the design and configuration of a segmented network using Cisco VLANs and inter-VLAN routing in Cisco Packet Tracer.
+
+The network separates three departments—HR, IT, and Operations—into individual VLANs and IP networks. Router-on-a-stick and 802.1Q trunking are then used to provide communication between the VLANs.
+
+## Network Design
+
+| VLAN | Department | Network | Default Gateway |
+|------|------------|---------|-----------------|
+| 10 | HR | 192.168.10.0/24 | 192.168.10.1 |
+| 20 | IT | 192.168.20.0/24 | 192.168.20.1 |
+| 30 | Operations | 192.168.30.0/24 | 192.168.30.1 |
+## Implementation
+
+### VLAN Configuration
+
+Three VLANs were created to logically separate the departments:
+
+- VLAN 10 — HR
+- VLAN 20 — IT
+- VLAN 30 — Operations
+
+Access ports were assigned as follows:
+
+| Switch Ports | VLAN | Department |
+|---|---|---|
+| Fa0/1 - Fa0/3 | 10 | HR |
+| Fa0/4 - Fa0/5 | 20 | IT |
+| Fa0/6 - Fa0/7 | 30 | Operations |
+| Fa0/8 | Trunk | Router Connection |
+
+### 802.1Q Trunk
+
+FastEthernet0/8 was configured as a trunk to carry VLAN 10, 20, and 30 traffic between the switch and router.
+
+### Router-on-a-Stick
+
+The router uses three subinterfaces:
+
+| Router Interface | VLAN | Gateway |
+|---|---|---|
+| G0/0.10 | 10 | 192.168.10.1 |
+| G0/0.20 | 20 | 192.168.20.1 |
+| G0/0.30 | 30 | 192.168.30.1 |
+## Testing and Verification
+
+Connectivity testing was performed in stages to verify both VLAN segmentation and inter-VLAN routing.
+
+### Test 1 — Same-VLAN Communication
+
+Devices within the same VLAN were able to successfully ping each other.
+
+Examples:
+
+- VLAN 10 → VLAN 10: Successful
+- VLAN 20 → VLAN 20: Successful
+- VLAN 30 → VLAN 30: Successful
+
+This verified that the access-port assignments and VLAN configurations were functioning correctly.
+
+### Test 2 — VLAN Isolation
+
+Before inter-VLAN routing was configured, devices in different VLANs could not communicate.
+
+Example:
+
+VLAN 10 → VLAN 20: Failed
+
+This confirmed that the VLANs were operating as separate Layer 2 broadcast domains.
+
+### Test 3 — Inter-VLAN Routing
+
+Router-on-a-stick was configured using 802.1Q subinterfaces and a default gateway for each VLAN.
+
+After routing was configured:
+
+- VLAN 10 → VLAN 20: Successful
+- VLAN 10 → VLAN 30: Successful
+- VLAN 20 → VLAN 30: Successful
+
+This verified successful Layer 3 communication between all three VLANs.
+
+## Troubleshooting
+
+During testing, a workstation in VLAN 10 could communicate with devices within its own VLAN but could not reach devices in other VLANs.
+
+I tested connectivity from the workstation to its local default gateway and discovered that the workstation did not have a default gateway configured.
+
+The default gateway `192.168.10.1` was added to the workstation. After correcting the configuration, inter-VLAN communication was successfully verified.
+
+This demonstrated a structured troubleshooting approach:
+
+1. Verify local IP configuration.
+2. Test same-VLAN connectivity.
+3. Test connectivity to the default gateway.
+4. Test connectivity to remote VLANs.
+5. Verify routing and trunk configuration if necessary.
+
+## Skills Demonstrated
+
+- VLAN creation and segmentation
+- Cisco IOS configuration
+- Access-port configuration
+- 802.1Q trunking
+- Router-on-a-stick
+- Router subinterfaces
+- IPv4 addressing and subnetting
+- Default gateway configuration
+- Inter-VLAN routing
+- Network connectivity testing
+- Layer 2 and Layer 3 troubleshooting
