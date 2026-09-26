@@ -24,7 +24,7 @@ Three VLANs were created to logically separate the departments:
 - VLAN 10 — HR
 - VLAN 20 — IT
 - VLAN 30 — Operations
-
+![VLAN Verification](02-VLAN%20verification.png)
 Access ports were assigned as follows:
 
 | Switch Ports | VLAN | Department |
@@ -37,7 +37,7 @@ Access ports were assigned as follows:
 ### 802.1Q Trunk
 
 FastEthernet0/8 was configured as a trunk to carry VLAN 10, 20, and 30 traffic between the switch and router.
-
+![Switch Interface Trunk Verification](03-Switch%20Interface%20Trunk%20Verification.png)
 ### Router-on-a-Stick
 
 The router uses three subinterfaces:
@@ -47,6 +47,7 @@ The router uses three subinterfaces:
 | G0/0.10 | 10 | 192.168.10.1 |
 | G0/0.20 | 20 | 192.168.20.1 |
 | G0/0.30 | 30 | 192.168.30.1 |
+![Router Subinterfaces](04-Router%20Subinterfaces.png)
 ## Testing and Verification
 
 Connectivity testing was performed in stages to verify both VLAN segmentation and inter-VLAN routing.
@@ -84,7 +85,7 @@ After routing was configured:
 - VLAN 20 → VLAN 30: Successful
 
 This verified successful Layer 3 communication between all three VLANs.
-
+![Inter-VLAN Ping](05-InterVLAN%20Ping.png)
 ## Troubleshooting
 
 During testing, a workstation in VLAN 10 could communicate with devices within its own VLAN but could not reach devices in other VLANs.
