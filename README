@@ -5,7 +5,9 @@
 This project demonstrates the design and configuration of a segmented network using Cisco VLANs and inter-VLAN routing in Cisco Packet Tracer.
 
 The network separates three departments—HR, IT, and Operations—into individual VLANs and IP networks. Router-on-a-stick and 802.1Q trunking are then used to provide communication between the VLANs.
+## Network Topology
 
+![VLAN Segmentation Network Topology](01-Full%20Network%20Topology.png)
 ## Network Design
 
 | VLAN | Department | Network | Default Gateway |
